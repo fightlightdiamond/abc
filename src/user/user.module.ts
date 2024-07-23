@@ -8,5 +8,6 @@ import { entities } from '../_map/entites';
   imports: [TypeOrmModule.forFeature(entities)],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}

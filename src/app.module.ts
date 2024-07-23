@@ -14,6 +14,7 @@ import { entities } from './_map/entites';
 import { PhotoModule } from './photo/photo.module';
 import { CategoryModule } from './category/category.module';
 import { QuestionModule } from './question/question.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { QuestionModule } from './question/question.module';
     PhotoModule,
     CategoryModule,
     QuestionModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
