@@ -1,15 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Like, Repository } from 'typeorm';
+import { Post } from './entities/post.entity';
 
 @Injectable()
 export class PostService {
+  constructor(
+    @InjectRepository(Post)
+    private usersRepository: Repository<Post>,
+  ) {}
+
   create(createPostDto: CreatePostDto) {
     return 'This action adds a new post';
   }
 
   findAll() {
-    return `This action returns all post`;
+    return this.usersRepository.findAndCount({
+      where: [
+        { status: 1, content: Like('%ar%') },
+        { status: 1, content: Like('%vo%') },
+        { status: 1, content: Like('%cu%') },
+      ],
+    });
   }
 
   findOne(id: number) {

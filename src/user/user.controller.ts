@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Paginate2Dto, PaginateDto } from './dto/paginate.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -22,9 +25,10 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
+  @Post('ok')
+  // @ApiQuery({ type: PaginateDto })
+  findAll(@Query(new ValidationPipe({ transform: true })) query: Paginate2Dto) {
+    return this.userService.findAll(query);
   }
 
   @Get(':id')

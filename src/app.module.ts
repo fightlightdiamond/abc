@@ -28,6 +28,7 @@ import { AuthModule } from './auth/auth.module';
       entities: entities,
       synchronize: true,
     }),
+    TypeOrmModule.forFeature(entities),
     FastifyMulterModule,
     HeroModule,
     UserModule,

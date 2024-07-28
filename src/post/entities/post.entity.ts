@@ -1,11 +1,5 @@
 //Post.entity.ts
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 
 @Entity()
@@ -14,9 +8,14 @@ export class Post {
   id: number;
 
   @Column()
-  post: string;
+  title: string;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  user: User;
+  @Column()
+  content: string;
+
+  @Column()
+  status: number;
+
+  @ManyToOne(() => User, (user) => user.posts)
+  author!: User;
 }

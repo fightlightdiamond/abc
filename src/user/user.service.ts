@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Profile } from '../profile/entities/profile.entity';
 import { Photo } from '../photo/entities/photo.entity';
+import { PaginateDto } from './dto/paginate.dto';
 
 @Injectable()
 export class UserService {
@@ -40,7 +41,7 @@ export class UserService {
     await this.photoRepository.save([photo1, photo2]);
   }
 
-  findAll() {
+  findAll(query) {
     return `This action returns all user`;
   }
 
