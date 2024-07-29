@@ -1,34 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { QuestionService } from './question.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 
-@Controller('question')
+@Controller()
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
-  @Post()
-  create(@Body() createQuestionDto: CreateQuestionDto) {
+  @MessagePattern('createQuestion')
+  create(@Payload() createQuestionDto: CreateQuestionDto) {
     return this.questionService.create(createQuestionDto);
   }
 
-  @Get()
+  @MessagePattern('findAllQuestion')
   findAll() {
     return this.questionService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.questionService.findOne(+id);
+  @MessagePattern('findOneQuestion')
+  findOne(@Payload() id: number) {
+    return this.questionService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateQuestionDto: UpdateQuestionDto) {
-    return this.questionService.update(+id, updateQuestionDto);
+  @MessagePattern('updateQuestion')
+  update(@Payload() updateQuestionDto: UpdateQuestionDto) {
+    return this.questionService.update(updateQuestionDto.id, updateQuestionDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.questionService.remove(+id);
+  @MessagePattern('removeQuestion')
+  remove(@Payload() id: number) {
+    return this.questionService.remove(id);
+  }
+
+  @MessagePattern({ cmd: 'sum' })
+  async accumulate(data: number[]): Promise<number> {
+    return (data || []).reduce((a, b) => a + b);
   }
 }

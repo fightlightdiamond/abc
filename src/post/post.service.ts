@@ -20,8 +20,12 @@ export class PostService {
     return this.usersRepository.findAndCount({
       where: [
         { status: 1, content: Like('%ar%') },
-        { status: 1, content: Like('%vo%') },
-        { status: 1, content: Like('%cu%') },
+        {
+          status: 1,
+          title: Like(
+            '%Villa arto derideo vinitor cibus saepe ullus vespillo vomer peccatus.%',
+          ),
+        },
       ],
     });
   }
