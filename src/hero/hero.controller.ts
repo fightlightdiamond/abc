@@ -12,9 +12,11 @@ import {
 import { HeroService } from './hero.service';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
-import { ApiBody, ApiConsumes, ApiOperation } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nest-lab/fastify-multer';
+import { Public } from 'src/auth/auth.decorator';
 
+@ApiTags('Hero')
 @Controller('hero')
 export class HeroController {
   constructor(private readonly heroService: HeroService) {}
@@ -44,6 +46,7 @@ export class HeroController {
     return this.heroService.remove(+id);
   }
 
+  @Public()
   @Patch('/file')
   @ApiOperation({ summary: 'Uploads a single file' })
   @ApiConsumes('multipart/form-data')
@@ -52,7 +55,7 @@ export class HeroController {
   })
   @UseInterceptors(FileInterceptor('file'))
   singleFile(@Body() body: CreateHeroDto, @UploadedFile() file: File) {
-    return console.log(body, file);
+    return 123;
   }
 
   @Patch('/files')

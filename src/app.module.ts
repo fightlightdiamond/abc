@@ -15,6 +15,7 @@ import { PhotoModule } from './photo/photo.module';
 import { CategoryModule } from './category/category.module';
 import { QuestionModule } from './question/question.module';
 import { AuthModule } from './auth/auth.module';
+import { UnzipService, ZipService } from '@app/share';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AuthModule } from './auth/auth.module';
       database: 'nester',
       entities: entities,
       synchronize: true,
+      logging: true,
     }),
     TypeOrmModule.forFeature(entities),
     FastifyMulterModule,
@@ -43,6 +45,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ZipService, UnzipService],
 })
 export class AppModule {}

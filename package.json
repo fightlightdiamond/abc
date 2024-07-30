@@ -35,8 +35,10 @@
     "@nestjs/platform-fastify": "^10.3.10",
     "@nestjs/swagger": "^7.4.0",
     "@nestjs/typeorm": "^10.0.2",
+    "archiver": "^7.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "decompress": "^4.2.1",
     "dotenv": "^16.4.5",
     "fastify-multipart": "^5.4.0",
     "mongoose": "^8.5.1",
@@ -44,7 +46,8 @@
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20",
-    "typeorm-extension": "^3.6.0"
+    "typeorm-extension": "^3.6.0",
+    "unzipper": "^0.12.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
