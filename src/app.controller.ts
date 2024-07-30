@@ -2,7 +2,7 @@ import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Public } from './auth/auth.decorator';
 import * as path from 'path';
-import {UnzipService, ZipService} from '../libs/share/src/'
+import {readFile, UnzipService, ZipService} from '../libs/share/src/'
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('App')
@@ -31,5 +31,13 @@ export class AppController {
     
     await this.unzipService.unzipFile(zipFilePath, outPath);
     return 'Files unzipped successfully';
+  }
+
+  @Public()
+  @Post('read')
+  async read(): Promise<string> {
+    const outPath = path.join(__dirname, '..', 'public', 'unzipped_folder', 'abc.txt');
+    
+    return await readFile(outPath);
   }
 }
