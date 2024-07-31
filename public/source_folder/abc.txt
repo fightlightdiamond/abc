@@ -1,1 +1,14 @@
-999
+{
+  "text": "Câu hỏi ví dụ",
+  "answers": [
+    {
+      "id": 1,
+      "text": "Đáp án A"
+    }
+  ],
+  "correctAnswerIds": [
+    1,
+    2
+  ],
+  "explain": ""
+}

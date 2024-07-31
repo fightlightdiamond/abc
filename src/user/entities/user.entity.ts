@@ -10,6 +10,11 @@ import { Profile } from '../../profile/entities/profile.entity';
 import { Photo } from '../../photo/entities/photo.entity';
 import { Post } from '../../post/entities/post.entity';
 
+type Access = {
+  sub: number;
+  groups: number[];
+};
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -36,4 +41,7 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.author)
   posts?: Post[];
+
+  @Column({ type: 'json', nullable: true })
+  access: Access[];
 }

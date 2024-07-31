@@ -55,6 +55,7 @@ export class HeroController {
   })
   @UseInterceptors(FileInterceptor('file'))
   singleFile(@Body() body: CreateHeroDto, @UploadedFile() file: File) {
+    console.log('============', body);
     return 123;
   }
 
