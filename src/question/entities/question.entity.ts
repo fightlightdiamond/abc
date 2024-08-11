@@ -11,7 +11,9 @@ export class Question {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    type: 'text',
+  })
   text: string;
 
   @Column('simple-json')
@@ -21,7 +23,7 @@ export class Question {
   correctAnswerIds: number[];
 
   @Column({
-    type: 'text'
+    type: 'text',
   })
   explain: string;
 

@@ -21,7 +21,7 @@ export class CreateAnswerDto {
 
 export class CreateQuestionDto {
   @ApiProperty({
-    example: 'Câu hỏi ví dụ',
+    example: '',
     description: 'Nội dung của câu hỏi',
   })
   @IsString()
@@ -31,6 +31,12 @@ export class CreateQuestionDto {
   @ApiProperty({
     type: [CreateAnswerDto],
     description: 'Danh sách các đáp án',
+    example: [
+      { id: 1, text: '' },
+      { id: 2, text: '' },
+      { id: 3, text: '' },
+      { id: 4, text: '' },
+    ],
   })
   @Type(() => CreateAnswerDto)
   @IsArray()
@@ -40,7 +46,7 @@ export class CreateQuestionDto {
   @ApiProperty({
     type: [Number],
     description: 'Danh sách các ID của đáp án đúng',
-    example: [1, 2],
+    example: [1],
   })
   @IsArray()
   correctAnswerIds: number[];

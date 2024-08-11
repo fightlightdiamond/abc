@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Profile } from '../profile/entities/profile.entity';
 import { Photo } from '../photo/entities/photo.entity';
-import { PaginateDto } from './dto/paginate.dto';
+import { FilterOperator, FilterSuffix, paginate } from 'nestjs-paginate';
 
 @Injectable()
 export class UserService {
@@ -42,7 +42,17 @@ export class UserService {
   }
 
   findAll(query) {
-    return `This action returns all user`;
+    return paginate(query, this.usersRepository, {
+      sortableColumns: ['id', 'name', 'age'],
+      nullSort: 'last',
+      defaultSortBy: [['id', 'DESC']],
+      searchableColumns: ['name', 'age'],
+      select: ['id', 'name', 'color'],
+      filterableColumns: {
+        name: [FilterOperator.EQ, FilterSuffix.NOT],
+        age: true,
+      },
+    });
   }
 
   async findOne(id: number) {

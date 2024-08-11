@@ -25,7 +25,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Post('ok')
+  @Get()
   // @ApiQuery({ type: PaginateDto })
   findAll(@Query(new ValidationPipe({ transform: true })) query: Paginate2Dto) {
     return this.userService.findAll(query);
